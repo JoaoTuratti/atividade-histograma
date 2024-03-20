@@ -1,0 +1,20 @@
+import re
+
+arqEntrada = open('arquivo.txt')
+counts = {}
+
+for line in arqEntrada:
+  line = re.sub(r'\b(?:[IVXLCDM]+)\b', '', line)
+  palavras = re.findall(r'\b[a-zA-Z]+\b', line)
+  for palavra in palavras:
+    counts[palavra] = counts.get(palavra, 0) + 1
+
+lista = []
+for palavra, num in counts.items():
+    newtup = (num, palavra)
+    lista.append(newtup)
+
+lista = sorted(lista, reverse=True)
+
+for num, palavra in lista:
+    print(palavra, num)
